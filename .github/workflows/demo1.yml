@@ -2,6 +2,13 @@ name: Events Demo 1
 on:
   pull_request:
     types: [opened]
+  push:
+    branches:
+      - main
+      - 'dev/*' # Ex: dev-new ; dev-this-is-new   # = Match anything expect / (slash)
+      - 'feature/**' # Ex: feature/23131 feature/entity-person/new-person  # = Match anyting include / (slash)
+    paths-ignore: # = Execute this workflow if any file is changed but expect those specified bellow
+      - '.github/workflows/*' #: If we change smth in workflows/ then this workflow will not be triggered
 jobs:
   deploy:
     runs-on: ubuntu-latest
